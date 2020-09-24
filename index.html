@@ -47,7 +47,7 @@
                     }
                 }
                 var data = google.visualization.arrayToDataTable([
-                    ["Temperatura", "Registros"],
+                    ["Temperatura", ""],
                     ["35 a 37.5°", firstTemp],
                     ["37.5 a 40°", secondTemp],
                     ["40 a 42.5°", thirdTemp],
@@ -71,6 +71,26 @@
                     document.getElementById("chart_div")
                 );
                 chart.draw(data, options);
+
+                var chart2 = new google.visualization.BarChart(
+                    document.getElementById("chart_div2")
+                );
+                chart2.draw(data, options);
+
+                var chart3 = new google.visualization.BarChart(
+                    document.getElementById("chart_div3")
+                );
+                chart3.draw(data, options);
+
+                var chart4 = new google.visualization.BarChart(
+                    document.getElementById("chart_div4")
+                );
+                chart4.draw(data, options);
+
+                var chart5 = new google.visualization.BarChart(
+                    document.getElementById("chart_div5")
+                );
+                chart5.draw(data, options);
             });
         }
     </script>
@@ -92,8 +112,64 @@
                 <p class="usuario-datos">Id: 10042</p>
             </div>
         </div>
+        <div class="chart-container" id="chart_div" style="width: 4000px; height: 250px"></div>
     </div>
-    <div id="chart_div" style="width: 100%; height: 500px"></div>
+    <div class="user-container">
+        <img class="img" src="https://lh3.googleusercontent.com/proxy/j0yV5R3ePTPlCl00HErFyJgVmFvf673pjpprKJvIZzklcGjCBGWMCY7SR0Ge9RiKSzOwgnnnQnnbsuOExuGi7oLcCGGpUy0_RkFmNZ03X5kTeiRlumvGYtEMeW3lf0yYW1Qvo1QY7PM7GiVv4bPlrf4rUMzcX4X385cL7zZ5RJgfMn4" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">José Elías</p>
+                <p class="usuario-datos">Mejía Cruz</p>
+            </div>
+            <div>
+                <p class="usuario-datos">34 años</p>
+                <p class="usuario-datos">Id: 10043</p>
+            </div>
+        </div>
+        <div class="chart-container" id="chart_div2" style="width: 4000px; height: 250px"></div>
+    </div>
+    <div class="user-container">
+        <img class="img" src="https://http2.mlstatic.com/D_NQ_NP_990542-MLA31020537999_062019-O.jpg" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Elena Patricia</p>
+                <p class="usuario-datos">Reyes Funez</p>
+            </div>
+            <div>
+                <p class="usuario-datos">36 años</p>
+                <p class="usuario-datos">Id: 10044</p>
+            </div>
+        </div>
+        <div class="chart-container" id="chart_div3" style="width: 4000px; height: 250px"></div>
+    </div>
+    <div class="user-container">
+        <img class="img" src="https://www.eventosfilm.com/wp-content/uploads/2018/01/foto-carnet-se%C3%B1orita-355x337.gif" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Julissa Stefany</p>
+                <p class="usuario-datos">Martinez Cabrera</p>
+            </div>
+            <div>
+                <p class="usuario-datos">30 años</p>
+                <p class="usuario-datos">Id: 10045</p>
+            </div>
+        </div>
+        <div class="chart-container" id="chart_div4" style="width: 4000px; height: 250px"></div>
+    </div>
+    <div class="user-container">
+        <img class="img" src="https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Melvin Roberto</p>
+                <p class="usuario-datos">Díaz Guzman</p>
+            </div>
+            <div>
+                <p class="usuario-datos">29 años</p>
+                <p class="usuario-datos">Id: 10046</p>
+            </div>
+        </div>
+        <div class="chart-container" id="chart_div5" style="width: 4000px; height: 250px"></div>
+    </div>
 </body>
 
 </html>
