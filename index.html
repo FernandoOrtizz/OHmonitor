@@ -1,295 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>OHMONITOR</title>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
     <link rel="stylesheet" href="./styles.css" />
     <!-- <script src="app.js"></script> -->
     <script type="text/javascript">
-      google.charts.load("current", {
-        packages: ["corechart"],
-      });
-      google.charts.setOnLoadCallback(drawChart);
-      google.charts.setOnLoadCallback(drawChart2);
-      google.charts.setOnLoadCallback(drawChart3);
-      google.charts.setOnLoadCallback(drawChart4);
-      google.charts.setOnLoadCallback(drawChart5);
-
-      function drawChart() {
-        firebase.initializeApp({
-          apiKey: "AIzaSyDBqL6EPdkdX1sOQcmqM4CB6_RqliNksT4",
-          authDomain: "temperatura-11955.firebaseapp.com",
-          databaseURL: "https://temperatura-11955.firebaseio.com",
-          projectId: "temperatura-11955",
-          storageBucket: "temperatura-11955.appspot.com",
-          messagingSenderId: "1002993199143",
-          appId: "1:1002993199143:web:495650022d8ce47cc98602",
-          measurementId: "G-DE7BFTW12H",
+        google.charts.load("current", {
+            packages: ["corechart"],
         });
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart2);
+        google.charts.setOnLoadCallback(drawChart3);
+        google.charts.setOnLoadCallback(drawChart4);
+        google.charts.setOnLoadCallback(drawChart5);
 
-        let db = firebase.database().ref().child("TEMPERATURA").child("Grados");
-        db.on("value", (snap) => {
-          let firstTemp = 0,
-            secondTemp = 0,
-            thirdTemp = 0,
-            fourthTemp = 0,
-            fiveTemp = 0;
-          console.log(snap.val());
-          for (let element of snap.val()) {
-            if (element >= 29 && element < 32) {
-              firstTemp = firstTemp + 1;
-            } else if (element >= 32 && element < 35) {
-              secondTemp = secondTemp + 1;
-            } else if (element >= 35 && element < 38) {
-              thirdTemp = thirdTemp + 1;
-              //console.log(thirdTemp);
-            } else if (element >= 38 && element < 40) {
-              fourthTemp = fourthTemp + 1;
-            } else if (element >= 40) {
-              fiveTemp = fiveTemp + 1;
-            }
-          }
-          var data = google.visualization.arrayToDataTable([
-            ["Temperatura", ""],
-            ["29 a 32°", firstTemp],
-            ["32 a 35°", secondTemp],
-            ["35 a 38°", thirdTemp],
-            ["38 a 40°", fourthTemp],
-            ["Mayor a 40°", fiveTemp],
-          ]);
+        function drawChart() {
+            firebase.initializeApp({
+                apiKey: "AIzaSyDBqL6EPdkdX1sOQcmqM4CB6_RqliNksT4",
+                authDomain: "temperatura-11955.firebaseapp.com",
+                databaseURL: "https://temperatura-11955.firebaseio.com",
+                projectId: "temperatura-11955",
+                storageBucket: "temperatura-11955.appspot.com",
+                messagingSenderId: "1002993199143",
+                appId: "1:1002993199143:web:495650022d8ce47cc98602",
+                measurementId: "G-DE7BFTW12H",
+            });
 
-          var options = {
-            title: "Historial de Temperaturas",
-            hAxis: {
-              title: "",
-              titleTextStyle: {
-                color: "#333",
-              },
-            },
-            vAxis: {
-              minValue: 0,
-            },
-          };
+            let db = firebase.database().ref().child("TEMPERATURA").child("Grados");
+            db.on("value", (snap) => {
+                let firstTemp = 0,
+                    secondTemp = 0,
+                    thirdTemp = 0,
+                    fourthTemp = 0,
+                    fiveTemp = 0;
+                console.log(snap.val());
+                for (let element of snap.val()) {
+                    if (element >= 29 && element < 32) {
+                        firstTemp = firstTemp + 1;
+                    } else if (element >= 32 && element < 35) {
+                        secondTemp = secondTemp + 1;
+                    } else if (element >= 35 && element < 38) {
+                        thirdTemp = thirdTemp + 1;
+                        //console.log(thirdTemp);
+                    } else if (element >= 38 && element < 40) {
+                        fourthTemp = fourthTemp + 1;
+                    } else if (element >= 40) {
+                        fiveTemp = fiveTemp + 1;
+                    }
+                }
+                var data = google.visualization.arrayToDataTable([
+                    ["Temperatura", ""],
+                    ["29 a 32°", firstTemp],
+                    ["32 a 35°", secondTemp],
+                    ["35 a 38°", thirdTemp],
+                    ["38 a 40°", fourthTemp],
+                    ["Mayor a 40°", fiveTemp],
+                ]);
 
-          var chart = new google.visualization.LineChart(
-            document.getElementById("chart_div")
-          );
-          chart.draw(data, options);
-        });
-      }
+                var options = {
+                    title: "Historial de Temperaturas",
+                    hAxis: {
+                        title: "",
+                        titleTextStyle: {
+                            color: "#333",
+                        },
+                    },
+                    vAxis: {
+                        minValue: 0,
+                    },
+                };
 
-      function drawChart2() {
-        var data = new google.visualization.DataTable();
-        data.addColumn("string", "Topping");
-        data.addColumn("number", "Slices");
-        data.addRows([
-          ["29 a 32°", 20],
-          ["32 a 35°", 2],
-          ["35 a 38°", 12],
-          ["38 a 40°", 0],
-          ["Mayor a 40°", 0],
-        ]);
+                var chart = new google.visualization.LineChart(
+                    document.getElementById("chart_div")
+                );
+                chart.draw(data, options);
+            });
+        }
 
-        var options = {
-          title: "Historial de temperaturas",
-          width: 700,
-          height: 250,
-        };
+        function drawChart2() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("string", "Topping");
+            data.addColumn("number", "");
+            data.addRows([
+                ["29 a 32°", 20],
+                ["32 a 35°", 2],
+                ["35 a 38°", 12],
+                ["38 a 40°", 0],
+                ["Mayor a 40°", 0],
+            ]);
 
-        var chart = new google.visualization.LineChart(
-          document.getElementById("chart_div2")
-        );
-        chart.draw(data, options);
-      }
+            var options = {
+                title: "Historial de temperaturas",
+                width: 700,
+                height: 250,
+            };
 
-      function drawChart3() {
-        var data = new google.visualization.DataTable();
-        data.addColumn("string", "Topping");
-        data.addColumn("number", "Slices");
-        data.addRows([
-          ["29 a 32°", 24],
-          ["32 a 35°", 8],
-          ["35 a 38°", 10],
-          ["38 a 40°", 2],
-          ["Mayor a 40°", 0],
-        ]);
+            var chart = new google.visualization.LineChart(
+                document.getElementById("chart_div2")
+            );
+            chart.draw(data, options);
+        }
 
-        var options = {
-          title: "Historial de temperaturas",
-          width: 700,
-          height: 250,
-        };
+        function drawChart3() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("string", "Topping");
+            data.addColumn("number", "");
+            data.addRows([
+                ["29 a 32°", 24],
+                ["32 a 35°", 8],
+                ["35 a 38°", 10],
+                ["38 a 40°", 2],
+                ["Mayor a 40°", 0],
+            ]);
 
-        var chart = new google.visualization.LineChart(
-          document.getElementById("chart_div3")
-        );
-        chart.draw(data, options);
-      }
+            var options = {
+                title: "Historial de temperaturas",
+                width: 700,
+                height: 250,
+            };
 
-      function drawChart4() {
-        var data = new google.visualization.DataTable();
-        data.addColumn("string", "Topping");
-        data.addColumn("number", "Slices");
-        data.addRows([
-          ["29 a 32°", 16],
-          ["32 a 35°", 25],
-          ["35 a 38°", 9],
-          ["38 a 40°", 7],
-          ["Mayor a 40°", 0],
-        ]);
+            var chart = new google.visualization.LineChart(
+                document.getElementById("chart_div3")
+            );
+            chart.draw(data, options);
+        }
 
-        var options = {
-          title: "Historial de temperaturas",
-          width: 700,
-          height: 250,
-        };
+        function drawChart4() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("string", "Topping");
+            data.addColumn("number", "");
+            data.addRows([
+                ["29 a 32°", 16],
+                ["32 a 35°", 25],
+                ["35 a 38°", 9],
+                ["38 a 40°", 7],
+                ["Mayor a 40°", 0],
+            ]);
 
-        var chart = new google.visualization.LineChart(
-          document.getElementById("chart_div4")
-        );
-        chart.draw(data, options);
-      }
+            var options = {
+                title: "Historial de temperaturas",
+                width: 700,
+                height: 250,
+            };
 
-      function drawChart5() {
-        var data = new google.visualization.DataTable();
-        data.addColumn("string", "Topping");
-        data.addColumn("number", "Slices");
-        data.addRows([
-          ["29 a 32°", 27],
-          ["32 a 35°", 12],
-          ["35 a 38°", 2],
-          ["38 a 40°", 0],
-          ["Mayor a 40°", 3],
-        ]);
+            var chart = new google.visualization.LineChart(
+                document.getElementById("chart_div4")
+            );
+            chart.draw(data, options);
+        }
 
-        var options = {
-          title: "Historial de temperaturas",
-          width: 700,
-          height: 250,
-        };
+        function drawChart5() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("string", "Topping");
+            data.addColumn("number", "");
+            data.addRows([
+                ["29 a 32°", 27],
+                ["32 a 35°", 12],
+                ["35 a 38°", 2],
+                ["38 a 40°", 0],
+                ["Mayor a 40°", 3],
+            ]);
 
-        var chart = new google.visualization.LineChart(
-          document.getElementById("chart_div5")
-        );
-        chart.draw(data, options);
-      }
+            var options = {
+                title: "Historial de temperaturas",
+                width: 700,
+                height: 250,
+            };
+
+            var chart = new google.visualization.LineChart(
+                document.getElementById("chart_div5")
+            );
+            chart.draw(data, options);
+        }
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="main-container">
-      <h1 class="title">Online Health Monitor</h1>
+        <h1 class="title">Online Health Monitor</h1>
     </div>
     <div class="user-container">
-      <img
-        class="img"
-        src="https://presscindible.files.wordpress.com/2011/06/carnet-ari21.jpg"
-        alt=""
-      />
-      <div class="user-data-container">
-        <div>
-          <p class="usuario-datos">Jhenna Elena</p>
-          <p class="usuario-datos">Smith Santos</p>
+        <img class="img" src="https://presscindible.files.wordpress.com/2011/06/carnet-ari21.jpg" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Jhenna Elena</p>
+                <p class="usuario-datos">Smith Santos</p>
+            </div>
+            <div>
+                <p class="usuario-datos">32 años</p>
+                <p class="usuario-datos">Id: 10042</p>
+            </div>
         </div>
-        <div>
-          <p class="usuario-datos">32 años</p>
-          <p class="usuario-datos">Id: 10042</p>
-        </div>
-      </div>
-      <div
-        class="chart-container"
-        id="chart_div"
-        style="width: 4000px; height: 250px"
-      ></div>
+        <div class="chart-container" id="chart_div" style="width: 4000px; height: 250px"></div>
     </div>
     <div class="user-container">
-      <img
-        class="img"
-        src="https://lh3.googleusercontent.com/proxy/j0yV5R3ePTPlCl00HErFyJgVmFvf673pjpprKJvIZzklcGjCBGWMCY7SR0Ge9RiKSzOwgnnnQnnbsuOExuGi7oLcCGGpUy0_RkFmNZ03X5kTeiRlumvGYtEMeW3lf0yYW1Qvo1QY7PM7GiVv4bPlrf4rUMzcX4X385cL7zZ5RJgfMn4"
-        alt=""
-      />
-      <div class="user-data-container">
-        <div>
-          <p class="usuario-datos">José Elías</p>
-          <p class="usuario-datos">Mejía Cruz</p>
+        <img class="img" src="https://lh3.googleusercontent.com/proxy/j0yV5R3ePTPlCl00HErFyJgVmFvf673pjpprKJvIZzklcGjCBGWMCY7SR0Ge9RiKSzOwgnnnQnnbsuOExuGi7oLcCGGpUy0_RkFmNZ03X5kTeiRlumvGYtEMeW3lf0yYW1Qvo1QY7PM7GiVv4bPlrf4rUMzcX4X385cL7zZ5RJgfMn4" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">José Elías</p>
+                <p class="usuario-datos">Mejía Cruz</p>
+            </div>
+            <div>
+                <p class="usuario-datos">34 años</p>
+                <p class="usuario-datos">Id: 10043</p>
+            </div>
         </div>
-        <div>
-          <p class="usuario-datos">34 años</p>
-          <p class="usuario-datos">Id: 10043</p>
-        </div>
-      </div>
-      <div class="chart-container" id="chart_div2"></div>
+        <div class="chart-container" id="chart_div2"></div>
     </div>
     <div class="user-container">
-      <img
-        class="img"
-        src="https://http2.mlstatic.com/D_NQ_NP_990542-MLA31020537999_062019-O.jpg"
-        alt=""
-      />
-      <div class="user-data-container">
-        <div>
-          <p class="usuario-datos">Elena Patricia</p>
-          <p class="usuario-datos">Reyes Funez</p>
+        <img class="img" src="https://http2.mlstatic.com/D_NQ_NP_990542-MLA31020537999_062019-O.jpg" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Elena Patricia</p>
+                <p class="usuario-datos">Reyes Funez</p>
+            </div>
+            <div>
+                <p class="usuario-datos">36 años</p>
+                <p class="usuario-datos">Id: 10044</p>
+            </div>
         </div>
-        <div>
-          <p class="usuario-datos">36 años</p>
-          <p class="usuario-datos">Id: 10044</p>
-        </div>
-      </div>
-      <div
-        class="chart-container"
-        id="chart_div3"
-        style="width: 4000px; height: 250px"
-      ></div>
+        <div class="chart-container" id="chart_div3" style="width: 4000px; height: 250px"></div>
     </div>
     <div class="user-container">
-      <img
-        class="img"
-        src="https://www.eventosfilm.com/wp-content/uploads/2018/01/foto-carnet-se%C3%B1orita-355x337.gif"
-        alt=""
-      />
-      <div class="user-data-container">
-        <div>
-          <p class="usuario-datos">Julissa Stefany</p>
-          <p class="usuario-datos">Martinez Cabrera</p>
+        <img class="img" src="https://www.eventosfilm.com/wp-content/uploads/2018/01/foto-carnet-se%C3%B1orita-355x337.gif" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Julissa Stefany</p>
+                <p class="usuario-datos">Martinez Cabrera</p>
+            </div>
+            <div>
+                <p class="usuario-datos">30 años</p>
+                <p class="usuario-datos">Id: 10045</p>
+            </div>
         </div>
-        <div>
-          <p class="usuario-datos">30 años</p>
-          <p class="usuario-datos">Id: 10045</p>
-        </div>
-      </div>
-      <div
-        class="chart-container"
-        id="chart_div4"
-        style="width: 4000px; height: 250px"
-      ></div>
+        <div class="chart-container" id="chart_div4" style="width: 4000px; height: 250px"></div>
     </div>
     <div class="user-container">
-      <img
-        class="img"
-        src="https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg"
-        alt=""
-      />
-      <div class="user-data-container">
-        <div>
-          <p class="usuario-datos">Melvin Roberto</p>
-          <p class="usuario-datos">Díaz Guzman</p>
+        <img class="img" src="https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg" alt="" />
+        <div class="user-data-container">
+            <div>
+                <p class="usuario-datos">Melvin Roberto</p>
+                <p class="usuario-datos">Díaz Guzman</p>
+            </div>
+            <div>
+                <p class="usuario-datos">29 años</p>
+                <p class="usuario-datos">Id: 10046</p>
+            </div>
         </div>
-        <div>
-          <p class="usuario-datos">29 años</p>
-          <p class="usuario-datos">Id: 10046</p>
-        </div>
-      </div>
-      <div
-        class="chart-container"
-        id="chart_div5"
-        style="width: 4000px; height: 250px"
-      ></div>
+        <div class="chart-container" id="chart_div5" style="width: 4000px; height: 250px"></div>
     </div>
-  </body>
+</body>
+
 </html>
